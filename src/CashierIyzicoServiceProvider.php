@@ -25,6 +25,7 @@ class CashierIyzicoServiceProvider extends PackageServiceProvider
             ->name('cashier-iyzico')
             ->hasConfigFile()
             ->hasViews()
+            ->hasRoute('web')
             ->runsMigrations()
             ->hasMigrations(
                 'add_iyzico_id_to_users_table',
