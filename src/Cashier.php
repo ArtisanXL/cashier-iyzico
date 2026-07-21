@@ -2,10 +2,16 @@
 
 namespace ArtisanXL\CashierIyzico;
 
+use ArtisanXL\CashierIyzico\Contracts\IyzicoGatewayContract;
 use Illuminate\Database\Eloquent\Model;
 
 class Cashier
 {
+    public static function gateway(): IyzicoGatewayContract
+    {
+        return app(IyzicoGatewayContract::class);
+    }
+
     public static function apiKey(): ?string
     {
         return config('cashier-iyzico.api_key');

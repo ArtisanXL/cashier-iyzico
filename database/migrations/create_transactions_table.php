@@ -12,6 +12,7 @@ return new class extends Migration
             $table->id();
             $table->morphs('billable');
             $table->string('iyzico_id')->index();
+            $table->string('iyzico_payment_transaction_id')->nullable();
             $table->string('status');
             $table->integer('amount');
             $table->string('currency');

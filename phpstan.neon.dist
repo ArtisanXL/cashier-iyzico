@@ -10,3 +10,7 @@ parameters:
     tmpDir: build/phpstan
     configDirectories:
         - config
+    ignoreErrors:
+        # Billable and its Concerns are public traits applied to the host app's
+        # models, so no class in src/ uses them and PHPStan skips them as unused.
+        - identifier: trait.unused

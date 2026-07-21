@@ -2,11 +2,18 @@
 
 namespace ArtisanXL\CashierIyzico;
 
+use ArtisanXL\CashierIyzico\Contracts\IyzicoGatewayContract;
+use ArtisanXL\CashierIyzico\Gateway\IyzicoGateway;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 
 class CashierIyzicoServiceProvider extends PackageServiceProvider
 {
+    public function packageRegistered(): void
+    {
+        $this->app->bind(IyzicoGatewayContract::class, IyzicoGateway::class);
+    }
+
     public function configurePackage(Package $package): void
     {
         /*
