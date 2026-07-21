@@ -2,9 +2,9 @@
 
 namespace ArtisanXL\CashierIyzico;
 
+use ArtisanXL\CashierIyzico\Commands\CashierIyzicoCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use ArtisanXL\CashierIyzico\Commands\CashierIyzicoCommand;
 
 class CashierIyzicoServiceProvider extends PackageServiceProvider
 {

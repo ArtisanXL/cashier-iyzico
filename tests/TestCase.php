@@ -2,9 +2,9 @@
 
 namespace ArtisanXL\CashierIyzico\Tests;
 
+use ArtisanXL\CashierIyzico\CashierIyzicoServiceProvider;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Orchestra\Testbench\TestCase as Orchestra;
-use ArtisanXL\CashierIyzico\CashierIyzicoServiceProvider;
 
 class TestCase extends Orchestra
 {
