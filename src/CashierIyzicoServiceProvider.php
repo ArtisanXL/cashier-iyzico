@@ -2,7 +2,6 @@
 
 namespace ArtisanXL\CashierIyzico;
 
-use ArtisanXL\CashierIyzico\Commands\CashierIyzicoCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 
@@ -19,7 +18,12 @@ class CashierIyzicoServiceProvider extends PackageServiceProvider
             ->name('cashier-iyzico')
             ->hasConfigFile()
             ->hasViews()
-            ->hasMigration('create_cashier_iyzico_table')
-            ->hasCommand(CashierIyzicoCommand::class);
+            ->runsMigrations()
+            ->hasMigrations(
+                'add_iyzico_id_to_users_table',
+                'create_subscriptions_table',
+                'create_subscription_items_table',
+                'create_transactions_table',
+            );
     }
 }
