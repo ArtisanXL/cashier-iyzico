@@ -3,6 +3,7 @@
 namespace ArtisanXL\CashierIyzico;
 
 use ArtisanXL\CashierIyzico\Contracts\IyzicoGatewayContract;
+use ArtisanXL\CashierIyzico\Exceptions\InvalidSubscription;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
@@ -81,6 +82,10 @@ class Subscription extends Model
      */
     public function swap(string $pricingPlan, ?string $product = null): static
     {
+        if ($this->ended()) {
+            throw InvalidSubscription::ended($this);
+        }
+
         $result = $this->gateway()->upgradeSubscription($this->iyzico_id, $pricingPlan);
 
         $this->fill([
@@ -94,6 +99,10 @@ class Subscription extends Model
 
     public function cancel(): static
     {
+        if ($this->canceled()) {
+            throw InvalidSubscription::alreadyCanceled($this);
+        }
+
         $this->gateway()->cancelSubscription($this->iyzico_id);
 
         $this->fill([
@@ -106,6 +115,10 @@ class Subscription extends Model
 
     public function resume(): static
     {
+        if (! $this->canceled()) {
+            throw InvalidSubscription::notCanceled($this);
+        }
+
         $this->gateway()->activateSubscription($this->iyzico_id);
 
         $this->fill([

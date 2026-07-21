@@ -6,6 +6,7 @@ use ArtisanXL\CashierIyzico\Address;
 use ArtisanXL\CashierIyzico\Buyer;
 use ArtisanXL\CashierIyzico\Cashier;
 use ArtisanXL\CashierIyzico\Contracts\IyzicoGatewayContract;
+use ArtisanXL\CashierIyzico\Exceptions\IncompletePayment;
 use ArtisanXL\CashierIyzico\Payment;
 use ArtisanXL\CashierIyzico\Transaction;
 use Illuminate\Database\Eloquent\Model;
@@ -65,7 +66,13 @@ trait PerformsCharges
             $this->firstPaymentTransactionId($result->getPaymentItems()),
         );
 
-        return Payment::fromCharge($result);
+        $payment = Payment::fromCharge($result);
+
+        if (! $payment->successful()) {
+            throw new IncompletePayment($payment);
+        }
+
+        return $payment;
     }
 
     /**

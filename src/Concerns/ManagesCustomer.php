@@ -5,8 +5,8 @@ namespace ArtisanXL\CashierIyzico\Concerns;
 use ArtisanXL\CashierIyzico\Address;
 use ArtisanXL\CashierIyzico\Buyer;
 use ArtisanXL\CashierIyzico\Contracts\IyzicoGatewayContract;
+use ArtisanXL\CashierIyzico\Exceptions\InvalidCustomer;
 use Illuminate\Database\Eloquent\Model;
-use RuntimeException;
 
 /**
  * @mixin Model
@@ -32,8 +32,7 @@ trait ManagesCustomer
         $id = $this->iyzicoId();
 
         if ($id === null) {
-            // A dedicated InvalidCustomer exception ships in a later step (Step 8).
-            throw new RuntimeException('The billable model does not have an Iyzico customer id.');
+            throw InvalidCustomer::notYetCreated($this);
         }
 
         return $id;
