@@ -1,0 +1,51 @@
+{
+    "config": {
+        "php-path": null,
+        "ansi-colors": true,
+        "custom-actions-dir": "",
+        "verbosity": "normal"
+    },
+    "commit-msg": {
+        "enabled": false,
+        "actions": []
+    },
+    "pre-push": {
+        "enabled": false,
+        "actions": []
+    },
+    "pre-commit": {
+        "enabled": true,
+        "actions": [
+            {
+                "action": "vendor/bin/pint --dirty --ansi",
+                "options": [],
+                "conditions": []
+            },
+            {
+                "action": "git diff --name-only --diff-filter=ACMR -- '*.php' | xargs -r git add",
+                "options": [],
+                "conditions": []
+            }
+        ]
+    },
+    "prepare-commit-msg": {
+        "enabled": false,
+        "actions": []
+    },
+    "post-commit": {
+        "enabled": false,
+        "actions": []
+    },
+    "post-merge": {
+        "enabled": false,
+        "actions": []
+    },
+    "post-checkout": {
+        "enabled": false,
+        "actions": []
+    },
+    "post-rewrite": {
+        "enabled": false,
+        "actions": []
+    }
+}
